@@ -20,7 +20,10 @@ $ php mobilenumbervalidator-cli validate:number "0740000000" "07200000000"
 ##### Validate numbers in a CSV file
 
 Pass csv file with a mobile number per line.
+
 07400000000,
+
+
 07200000000 
 
 ```bash
