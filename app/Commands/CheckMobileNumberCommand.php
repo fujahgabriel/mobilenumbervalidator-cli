@@ -14,7 +14,7 @@ class CheckMobileNumberCommand extends ValidatorCommand
      */
     protected $signature = 'validate:number
                             {source* : A list of numbers or files to validate against}
-                            {--file : the source is a list of numbers in file}
+                            {--file : the source of the file}
                             {--output= : the output path}';
 
     /**
