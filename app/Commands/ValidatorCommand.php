@@ -57,8 +57,9 @@ abstract class ValidatorCommand extends Command
         $this->setSource();
         $this->validateOutputPath();
         $this->buildCsv($this->compileRowsFromSource($this->source));
-        $this->info('Total Number Validated: ' . count($this->source));
         $this->info('Csv Filename: ' . $this->fileName);
+        $this->info('Total Number Validated: ' . count($this->source));
+        $this->info('Output Path: ' .$this->outputPath);
     }
 
     /**
@@ -85,7 +86,7 @@ abstract class ValidatorCommand extends Command
     {
         return collect($source)
             ->map([$this, 'validatorNumber'])
-            ->map([$this, 'buildRowFromValidator'])
+            ->map([$this, 'creatRowFromValidator'])
             ->prepend(['Mobile Number', 'Carrier Name', 'Validity Status'])
             ->map(function ($row) {
                 return implode(',', $row);
@@ -93,12 +94,12 @@ abstract class ValidatorCommand extends Command
     }
 
     /**
-     * Build a row.
+     * create a row.
      *
      * @param  App\MobileNumberValidator $validator
      * @return array
      */
-    public function buildRowFromValidator(MobileNumberValidator $validator): array
+    public function creatRowFromValidator(MobileNumberValidator $validator): array
     {
         $row = [$validator->getNumber(), '', 'Invalid'];
 
@@ -118,7 +119,7 @@ abstract class ValidatorCommand extends Command
         $this->source = $this->option('file')
             ? $this->getSourceFromFile($this->argument('source'))
             : array_wrap($this->argument('source'));
-        $this->info('Source Status: ' . ($this->option('file') ? 'File' : 'List'));
+        $this->info('Source Type: ' . ($this->option('file') ? 'File' : 'List'));
     }
 
     /**
